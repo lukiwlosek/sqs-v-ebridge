@@ -1,6 +1,5 @@
-export * as Todo from "./todo";
 import { z } from "zod";
-import crypto from "crypto";
+import * as crypto from "crypto";
 
 import { event } from "./event";
 
@@ -27,3 +26,5 @@ export function list() {
       title: "Todo #" + index,
     }));
 }
+
+export * as Todo from "./todo";

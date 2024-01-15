@@ -7,10 +7,7 @@ export function API({ stack }: StackContext) {
     },
   });
 
-  const sqs = new Queue(stack, 'queue', {
-
-  })
-
+  const sqs = new Queue(stack, 'queue')
 
   const api = new Api(stack, "api", {
     defaults: {
@@ -20,8 +17,10 @@ export function API({ stack }: StackContext) {
     },
     routes: {
       "GET /": "packages/functions/src/lambda.handler",
-      "GET /todo": "packages/functions/src/todo.list",
-      "POST /todo": "packages/functions/src/todo.create",
+      "GET /todo-e-bridge": "packages/functions/src/todo.list",
+      "GET /todo-sqs": "packages/functions/src/todoSqs.list",
+      "POST /todo-e-bridge": "packages/functions/src/todo.create",
+      "POST /todo-sqs": "packages/functions/src/todoSqs.create",
     },
   });
 
@@ -35,6 +34,7 @@ export function API({ stack }: StackContext) {
     buildCommand: "npm run build",
     environment: {
       VITE_APP_API_URL: api.url,
+      SQS_QUEUE_ARN: sqs.queueArn
     },
   });
 

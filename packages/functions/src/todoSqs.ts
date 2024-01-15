@@ -1,8 +1,8 @@
 import { ApiHandler } from "sst/node/api";
-import { Todo } from "@sqs-v-ebridge/core/src/eBridge/todo";
+import { TodoSqs } from "@sqs-v-ebridge/core/src/sqs/todo";
 
 export const create = ApiHandler(async (_evt) => {
-  await Todo.create();
+  await TodoSqs.create();
 
   return {
     statusCode: 200,
@@ -13,6 +13,6 @@ export const create = ApiHandler(async (_evt) => {
 export const list = ApiHandler(async (_evt) => {
   return {
     statusCode: 200,
-    body: JSON.stringify(Todo.list()),
+    body: JSON.stringify(TodoSqs.list()),
   };
 });
